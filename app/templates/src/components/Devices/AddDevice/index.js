@@ -6,12 +6,14 @@ import { DckActionCreators, DckSelectors } from "dck-redux";
 import * as ItemTypes from "../../../redux/items/types";
 import ProcessTypes from "../../../redux/processes/types";
 import DeviceForm from "../DeviceForm";
+import ProgressOverlay from "../../ProgressOverlay"
 
 class AddDevice extends Component {
   render() {
     return (
       <div>
-        <DeviceForm
+        {this.props.deviceCreating &&  <ProgressOverlay visible={true}/>}
+        {!this.props.deviceUpdating && <DeviceForm
           device={null}
           onSaveClicked={data => this.props.addDevice(data)}
           failed={this.props.deviceCreateFailed}
@@ -21,7 +23,7 @@ class AddDevice extends Component {
               ? this.props.deviceAddProcess.result.message
               : ""
           }
-        />
+        /> }
       </div>
     );
   }

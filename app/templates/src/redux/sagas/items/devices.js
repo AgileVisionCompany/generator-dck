@@ -5,13 +5,14 @@ import ProcessTypes from "../../processes/types";
 import * as ItemTypes from "../../items/types";
 import { browserHistory } from "react-router";
 import store from "store";
+import {delay} from 'redux-saga';
 
 function* loadDevicesSaga() {
+  
   yield put({
     type: DckActionTypes.ASYNC_PROCESS_START,
     processCode: ProcessTypes.DEVICES_LOAD
   });
-
   console.log("Load devices list requst");
   const mockedDevices = store.get("mocked_data").devices;
 
@@ -42,7 +43,7 @@ function* loadDevicesSaga() {
     });
     processResult = { success: false, message: error };
   }
-
+  yield delay(2000);
   yield put({
     type: DckActionTypes.ASYNC_PROCESS_STOP,
     processCode: ProcessTypes.DEVICES_LOAD,
@@ -86,6 +87,7 @@ function* createDeviceSaga(action) {
     processResult = { success: false, message: error };
   }
   }
+  yield delay(2000);
   yield put({
     type: DckActionTypes.ASYNC_PROCESS_STOP,
     processCode: ProcessTypes.DEVICES_ADD,
@@ -131,6 +133,7 @@ function* deleteDeviceSaga(action) {
     processResult = { success: false, message: error };
   }
   }
+  yield delay(2000);
   yield put({
     type: DckActionTypes.ASYNC_PROCESS_STOP,
     processCode: ProcessTypes.DEVICES_REMOVE,
@@ -178,6 +181,7 @@ function* updateDeviceSaga(action) {
     processResult = { success: false, message: error };
   }
 }
+yield delay(2000);
   yield put({
     type: DckActionTypes.ASYNC_PROCESS_STOP,
     processCode: ProcessTypes.DEVICES_UPDATE,
