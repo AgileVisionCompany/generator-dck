@@ -8,8 +8,7 @@ import FieldGroup from "../FieldGroup";
 import { email, requiredValue } from "dck-validators";
 import { initField } from "../../lib/form-builder";
 import { DckSelectors, DckActionCreators, DckActionTypes } from "dck-redux";
-
-import Spinner from "react-spinkit";
+import ProgressOverlay from "../ProgressOverlay"
 
 class SignIn extends Component {
   constructor(props) {
@@ -90,7 +89,7 @@ class SignIn extends Component {
                     </Button>
                   )}
                   {this.props.signInProcessRunning && (
-                    <Spinner name="double-bounce" color="white" />
+                    <ProgressOverlay visible = {true}/>
                   )}
                 </div>
               </form>

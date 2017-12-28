@@ -2,6 +2,7 @@ import { takeEvery, all, put, call } from "redux-saga/effects";
 import { browserHistory } from "react-router";
 import { DckActionTypes, DckActionCreators } from "dck-redux";
 import * as authRequest from "./authRequest";
+import {delay} from 'redux-saga';
 import store from "store";
 
 function* signInSaga(action) {
@@ -72,7 +73,7 @@ function* signInSaga(action) {
   }
 
   console.log("result=" + authenticated);
-
+  yield delay(3000);
   yield put({
     type: DckActionTypes.ASYNC_PROCESS_STOP,
     processCode: DckActionTypes.SIGN_IN,
