@@ -1,0 +1,55 @@
+.signin-container {
+  background-color: #053d5e;
+}
+
+.signin-content {
+  height: 100%;
+}
+
+.signin-form-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.control-label {
+  color: #eee;
+}
+
+.signin-form {
+  min-width: 280px;
+}
+
+.forgot-password-link {
+  color: #afa32b;
+}
+
+.welcome {
+  color: #e3d9cf;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.signin-link {
+  font-weight: 100;
+}
+
+.password-hint {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 12px;
+}
+
+.sign-in-button-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo {
+  color: #e3d9cf;
+  height: 150px;
+  width: 600px;
+}

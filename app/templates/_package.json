@@ -1,23 +1,33 @@
 {
-  "name": "<%= name %>",
+  "name": "test",
   "version": "0.1.0",
   "dependencies": {
-    "dck-lambda-utils": "^1.0.5",
+    "bootstrap": "^3.3.7",
     "dck-react-components": "^1.0.5",
     "dck-redux": "^1.0.5",
     "dck-validators": "^1.0.5",
     "font-awesome": "^4.7.0",
     "immutable": "^3.8.2",
     "react": "^16.2.0",
+    "react-bootstrap": "^0.31.5",
+    "react-bootstrap-table": "^4.3.0",
     "react-dom": "^16.2.0",
+    "react-router-redux": "^4.0.8",
     "react-scripts": "1.0.17",
     "redux": "^3.7.2",
-    "reselect": "^3.0.1"
+    "redux-saga": "^0.16.0",
+    "reselect": "^3.0.1",
+    "store": "^2.0.12"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "NODE_ENV=development && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1"
   }
 }
