@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Grid, Row, Col, Button, ButtonToolbar } from "react-bootstrap";
 import { BootstrapTable } from "react-bootstrap-table";
 import "react-bootstrap-table/dist/react-bootstrap-table.min.css";
+import "./styles.css";
 
 import RemovalDialog from "../../RemovalDialog";
 
@@ -31,6 +32,9 @@ class DeviceTable extends Component {
       this.props.selectedHandler(row.id);
     }
     this.setState({ itemSelected: isSelected });
+    if (e.target.cellIndex == 0) {
+      this.props.editHandler(row.id);
+    }
   }
 
   getSelectedItems() {
@@ -75,6 +79,7 @@ class DeviceTable extends Component {
           condensed
           pagination
           selectRow={this.state.selectRowProp}
+          trClassName="tr-bootstrap-table"
         >
           {this.props.children}
         </BootstrapTable>
@@ -83,15 +88,6 @@ class DeviceTable extends Component {
           <Button bsStyle="primary" onClick={this.props.addNewHandler}>
             {this.props.addNewLabel}
           </Button>
-          {this.props.editable && (
-            <Button
-              bsStyle="default"
-              onClick={() => this.editClicked()}
-              disabled={!this.state.itemSelected}
-            >
-              Edit selected
-            </Button>
-          )}
           <Button
             bsStyle="danger"
             onClick={() => this.showRemoveDialog()}
@@ -100,7 +96,6 @@ class DeviceTable extends Component {
             Remove selected
           </Button>
         </ButtonToolbar>
-
         <RemovalDialog
           items={this.getItemsToRemove()}
           title="Remove device?"

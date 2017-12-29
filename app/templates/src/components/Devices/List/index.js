@@ -6,9 +6,10 @@ import { Col } from "react-bootstrap";
 import * as ItemTypes from "../../../redux/items/types";
 import { DckSelectors, DckActionCreators } from "dck-redux";
 import ProcessTypes from "../../../redux/processes/types";
-import ProgressOverlay from "../../ProgressOverlay"
+import ProgressOverlay from "../../ProgressOverlay";
 
 import DeviceTable from "../DeviceTable";
+import "./styles.css";
 
 class ListDevices extends Component {
   renderItemToRemove(item) {
@@ -22,50 +23,52 @@ class ListDevices extends Component {
   render() {
     return (
       <Col md={12}>
-          {this.props.devicesLoading &&  <ProgressOverlay visible={true}/>}
-          {!this.props.devicesLoading &&
-        <DeviceTable
-          items={this.props.devices}
-          onConfirmRemoval={ids => this.props.removeDevices(ids)}
-          renderItemToRemove={item => this.renderItemToRemove(item)}
-          addNewLabel="Create new device"
-          addNewHandler={() =>
-            this.props.router.push({ pathname: "/devices/add" })
-          }
-          editHandler={id =>
-            this.props.router.push({ pathname: `/devices/${id}/edit` })
-          }
-          selectedHandler={id => this.selectedHandler(id)}
-          editable={true}
-        >
-          <TableHeaderColumn
-            dataField="id"
-            isKey={true}
-            dataAlign="center"
-            dataSort={true}
-            filter={{ type: "TextFilter", delay: 1000 }}
-            width="150"
+        {this.props.devicesLoading && <ProgressOverlay visible={true} />}
+        {!this.props.devicesLoading && (
+          <DeviceTable
+            items={this.props.devices}
+            onConfirmRemoval={ids => this.props.removeDevices(ids)}
+            renderItemToRemove={item => this.renderItemToRemove(item)}
+            addNewLabel="Create new device"
+            addNewHandler={() =>
+              this.props.router.push({ pathname: "/devices/add" })
+            }
+            editHandler={id =>
+              this.props.router.push({ pathname: `/devices/${id}/edit` })
+            }
+            selectedHandler={id => this.selectedHandler(id)}
+            editable={true}
           >
-            Id
-          </TableHeaderColumn>
-          <TableHeaderColumn
-            dataField="name"
-            dataAlign="center"
-            dataSort={true}
-            filter={{ type: "TextFilter", delay: 1000 }}
-          >
-            Name
-          </TableHeaderColumn>
-          <TableHeaderColumn
-            dataField="location"
-            dataAlign="center"
-            dataSort={true}
-            filter={{ type: "TextFilter", delay: 1000 }}
-            width="150"
-          >
-            Location
-          </TableHeaderColumn>
-        </DeviceTable>}
+            <TableHeaderColumn
+              dataField="id"
+              isKey={true}
+              dataAlign="center"
+              dataSort={true}
+              filter={{ type: "TextFilter", delay: 1000 }}
+              width="150"
+              columnClassName="td-column-link-string"
+            >
+              Id
+            </TableHeaderColumn>
+            <TableHeaderColumn
+              dataField="name"
+              dataAlign="center"
+              dataSort={true}
+              filter={{ type: "TextFilter", delay: 1000 }}
+            >
+              Name
+            </TableHeaderColumn>
+            <TableHeaderColumn
+              dataField="location"
+              dataAlign="center"
+              dataSort={true}
+              filter={{ type: "TextFilter", delay: 1000 }}
+              width="150"
+            >
+              Location
+            </TableHeaderColumn>
+          </DeviceTable>
+        )}
       </Col>
     );
   }
