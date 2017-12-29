@@ -9,6 +9,7 @@ import ProcessTypes from "../../../redux/processes/types";
 import ProgressOverlay from "../../ProgressOverlay";
 
 import DeviceTable from "../DeviceTable";
+import "./styles.css";
 
 class ListDevices extends Component {
   renderItemToRemove(item) {
@@ -45,6 +46,7 @@ class ListDevices extends Component {
               dataSort={true}
               filter={{ type: "TextFilter", delay: 1000 }}
               width="150"
+              columnClassName="td-column-link-string"
             >
               Id
             </TableHeaderColumn>
