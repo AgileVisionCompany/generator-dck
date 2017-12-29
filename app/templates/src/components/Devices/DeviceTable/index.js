@@ -2,8 +2,12 @@ import React, { Component } from "react";
 import { Grid, Row, Col, Button, ButtonToolbar } from "react-bootstrap";
 import { BootstrapTable } from "react-bootstrap-table";
 import "react-bootstrap-table/dist/react-bootstrap-table.min.css";
+import "./styles.css";
 
+import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 import RemovalDialog from "../../RemovalDialog";
+
+let contextTrigger = null;
 
 class DeviceTable extends Component {
   constructor(props) {
@@ -31,6 +35,9 @@ class DeviceTable extends Component {
       this.props.selectedHandler(row.id);
     }
     this.setState({ itemSelected: isSelected });
+    if (e.target.cellIndex == 0 && contextTrigger && isSelected) {
+      contextTrigger.handleContextClick(e);
+    }
   }
 
   getSelectedItems() {
@@ -44,6 +51,9 @@ class DeviceTable extends Component {
   }
 
   showRemoveDialog() {
+    if (!this.state.itemSelected) {
+      return;
+    }
     this.setState({ showRemoveModal: true });
   }
 
@@ -61,6 +71,9 @@ class DeviceTable extends Component {
   }
 
   editClicked() {
+    if (!this.state.itemSelected) {
+      return;
+    }
     const ids = this.getSelectedItems().map(x => x.id);
     this.props.editHandler(ids);
   }
@@ -68,16 +81,19 @@ class DeviceTable extends Component {
   renderContent() {
     return (
       <Col md={12}>
-        <BootstrapTable
-          data={this.props.items}
-          striped={true}
-          hover={true}
-          condensed
-          pagination
-          selectRow={this.state.selectRowProp}
-        >
-          {this.props.children}
-        </BootstrapTable>
+        <ContextMenuTrigger id="context-menu" ref={c => (contextTrigger = c)}>
+          <BootstrapTable
+            data={this.props.items}
+            striped={true}
+            hover={true}
+            condensed
+            pagination
+            selectRow={this.state.selectRowProp}
+            trClassName="tr-bootstrap-table"
+          >
+            {this.props.children}
+          </BootstrapTable>
+        </ContextMenuTrigger>
         <br />
         <ButtonToolbar className="tableToolbar">
           <Button bsStyle="primary" onClick={this.props.addNewHandler}>
@@ -100,7 +116,6 @@ class DeviceTable extends Component {
             Remove selected
           </Button>
         </ButtonToolbar>
-
         <RemovalDialog
           items={this.getItemsToRemove()}
           title="Remove device?"
@@ -108,6 +123,10 @@ class DeviceTable extends Component {
           close={() => this.closeRemoveModal()}
           confirmRemoval={() => this.confirmRemoval()}
         />
+        <ContextMenu id="context-menu" className="context-menu-items">
+          <MenuItem onClick={() => this.editClicked()}>Edit</MenuItem>
+          <MenuItem onClick={() => this.showRemoveDialog()}>Remove</MenuItem>
+        </ContextMenu>
       </Col>
     );
   }
