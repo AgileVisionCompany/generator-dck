@@ -6,8 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "files": ["app"],
-  "keywords": ["yeoman-generator"],
+  "files": [
+    "app"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {

@@ -2,6 +2,7 @@
   "name": "<%= name %>",
   "version": "0.1.0",
   "dependencies": {
+    "react-redux": "^5.0.7",
     "bootstrap": "^3.3.7",
     "dck-react-components": "^1.0.5",
     "dck-redux": "^1.0.5",
